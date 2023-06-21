@@ -1,0 +1,110 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Portfolio</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <!-- <link rel="stylesheet" href="index.css"> -->
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="#">My Portfolio</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="jumbotron">
+      <img src="{% static 'img/profile_pic.jpg' %}" alt="Profile Image" class="profile-image">
+      <div>
+        <h1 class="display-4">Welcome to My Portfolio!</h1>
+        <p class="lead">Hello, I'm Diyar Makhambetali, a frontend&backend developer, data scientist</p>
+        <div class="social-icons">
+          <a href="https://wa.me/+77473218595"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://instagram.com/_makhambetali_"><i class="fab fa-instagram"></i></a>
+          <a href="https://github.com/makhambetali"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div id="about" class="dark-section">
+      <div class="section-heading">
+        <h2>About Me</h2>
+        <p>I am 17 years old school student. I am studying at Nazarbayev Intellectual School, in Shymkent. There are 3 years of experience as a self-learning developer and 2 of them i had dedicated two learn website developing. At the moment, i am studying data science at <a href="https://www.simplilearn.com/" target="_blank">Simplelearn</a> </p>
+      </div>
+    </div>
+
+    <div id="projects" class="fade-in">
+      <div class="section-heading">
+        <h2>Projects</h2>
+        <p>Here are some of my recent projects.</p>
+      </div>
+      <div class="row">
+        {%  for project in projects %}
+        <div class="col-md-6">
+          <div class="card project-card mb-3">
+            <img src="media/{{project.image}}" class="card-img-top" alt="Project 1">
+            <div class="card-body">
+              <h5 class="card-title">{{project.name}}</h5>
+              <p class="card-text" title="{{project.description}}">{{project.description|truncatechars:70}}.</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+       
+      </div>
+    </div>
+
+    <div id="contact" class="dark-section">
+      <div class="section-heading">
+        <h2>Contact</h2>
+        <p>Feel free to reach out to me.</p>
+      </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <form class="contact-form" method="post">
+          {%csrf_token%}
+            <div class="form-group">
+              <input type="text" class="form-control input-area" name= 'name' id="name" placeholder="Your Name">
+            </div>
+            <div class="form-group">
+              <input type="name" class="form-control input-area" name = 'email'id="email" placeholder="Your Email">
+            </div>
+            <div class="form-group">
+              <textarea class="form-control input-area" name = 'message'id="message" rows="5" placeholder="Your Message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="{% static 'js/index.js' %}"></script>
+</body>
+
+</html>
